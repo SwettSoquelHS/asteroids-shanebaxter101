@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * *
  Class variable declarations here
  */
-Spaceship player1;
+Spaceship player1 = new Spaceship(200, 200);
 //Asteroid[] asteroids;
 //Star[] starField;
 
@@ -51,7 +51,7 @@ public void draw() {
   //TODO: Part II
 
   //Update spaceship
-  //TODO: Part I
+  player1.show();
   
   //Check for ship collision agaist asteroids
   //TODO: Part II or III

@@ -147,11 +147,19 @@ abstract class Mover implements Movable {
   }
   
   void setDirection(float newDirectionInDegrees){
-    this.radius = newDirectionInDegrees;
+    this.direction = newDirectionInDegrees;
   }
   
   void setSpeed(float newSpeed){
     this.speed = newSpeed;
+  }
+  
+  void setX(float newX){
+    this.x = newX;
+  }
+  
+  void setY(float newY){
+    this.y = newY;
   }
   
 }

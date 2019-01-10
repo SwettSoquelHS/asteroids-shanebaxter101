@@ -5,11 +5,6 @@
  might be useful.
  */
 class Spaceship extends Mover {  
-  float x, y;
-  float speed;
-  float direction;
-  int myColor;
-  float radius;
 
   Spaceship(float x, float y) {
     super(x, y);
@@ -23,6 +18,7 @@ class Spaceship extends Mover {
     pushMatrix();
     translate(x, y);
     rotate(radians(direction + 270));
+    fill(216, 9, 9);
     beginShape();
     vertex(5, 0);
     vertex(15, -35);

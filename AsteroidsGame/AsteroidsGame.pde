@@ -2,8 +2,8 @@
  Class variable declarations here
  */
 Spaceship player1 = new Spaceship(300, 200);
-//Asteroid[] asteroids;
-//Star[] starField;
+Asteroid[] asteroids;
+Star[] starField;
 
 
 /*
@@ -21,11 +21,20 @@ boolean SPACE_BAR;    //User is pressing space bar
 public void setup() {
   size(1000, 800);
 
-  //initialize your asteroid array and fill it
-
-  //initialize ship
-
-  //initialize starfield
+  starField = new Star[50];
+  for(int i=0; i < starField.length; i++){
+    starField[i] = new Star(random(0,1000), random(0, 800), (int)random(6,9));
+  } 
+  
+  asteroids = new Asteroid[10];
+  for(int i=0; i< asteroids.length; i++) {
+    if(i % 3 == 0)
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 2.0);
+    if(i % 2 == 0)
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 1.5);
+    else
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 1.0);
+  } 
 }
 
 
@@ -37,7 +46,9 @@ public void draw() {
   background(0);
 
   //Draw Starfield first 
-  //TODO: Part I
+  for(int i=0; i<starField.length; i++){
+    starField[i].show();
+  }
 
   //Check bullet collisions
   //TODO: Part III or IV - for not just leave this comment
@@ -48,7 +59,10 @@ public void draw() {
   //TODO: Part III, for now keep this comment in place
 
   //Draw asteroids
-  //TODO: Part II
+  for(int i=0; i<asteroids.length; i++){
+    asteroids[i].update();
+    asteroids[i].show();
+  }
 
   //Update spaceship
   if (ROTATE_LEFT)
@@ -57,22 +71,19 @@ public void draw() {
     player1.setDirection(player1.getDirection() + 3.0);
   if (MOVE_FORWARD) {
     if (player1.getSpeed() < 3) {
-      player1.setSpeed(player1.getSpeed() + 3);
+      player1.setSpeed(player1.getSpeed() + 5);
     }
   } else {
     if (player1.getSpeed() > 0) {
-      player1.setSpeed(player1.getSpeed() - 0.2);
+      player1.setSpeed(player1.getSpeed() - 0.1);
     }
     if (player1.getSpeed() < 0) {
       player1.setSpeed(0);
     }
   }
- 
- if(SPACE_BAR){
-   player1.setSpeed(0);
-   player1.setX(random(100, 900));
-   player1.setY(random(100, 700));
- }
+  
+  
+  player1.show();
   player1.update();
 
 
@@ -80,7 +91,6 @@ public void draw() {
   //TODO: Part II or III
 
   //Draw spaceship & and its bullets
-  player1.show();
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 
 
@@ -108,6 +118,10 @@ void keyPressed() {
   if (keyCode == 32) {  
     SPACE_BAR = true;
   }
+  
+  if(keyCode == 72) {
+    player1.hyperspace();
+  }
 }
 
 
@@ -129,3 +143,16 @@ void keyReleased() {
     SPACE_BAR = false;
   }
 }
+
+/* void checkOnAsteroids(){
+  for(int i=0; i < asteroids.length; i++){
+    Asteroid a = asteroids[i];
+    for(int j=0; j < asteroids.length; j++){
+      Asteroid a2 = asteroids[j];
+      if(a != a2 && a.collidingWith(a2)){
+        // do something...
+      }
+    }
+  }
+}
+*/

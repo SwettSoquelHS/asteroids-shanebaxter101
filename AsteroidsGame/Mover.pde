@@ -73,37 +73,56 @@ abstract class Mover implements Movable {
   protected float speed;
   protected float direction;
   protected int myColor;
-  protected float radius;  
+  protected float radius; 
+  protected float size;
 
 
   /*
     Default Mover, not actually moving and directionless
-  */
+   */
   Mover(float x, float y) {
     //The line below shows how we can 
     //link this constructor to the constructor below through "this"
-    this(x, y, 0, 0);  
+    this(x, y, 0, 0, 0);
   }
 
   /*
     Mover constructor specifying x, y position along with its speed and
-    direction (in degrees)
-  */
-  Mover(float x, float y, float speed, float direction) {
+   direction (in degrees)
+   */
+  Mover(float x, float y, float speed, float direction, float size) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.direction = direction;
     myColor = 225;
     radius = 0.0;
+    this.size = size;
   }
 
   /*
     Most of your movalbe objects should follow this pattern.
    */
   void update() {
+    
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
+    
+    if(x > 1015){
+      x = 1;
+    }
+    
+    if(x < -15){
+      x = 1001;
+    }
+    
+    if(y > 815){
+      y = 1;
+    }
+    
+    if(y < -15){
+      y = 801;
+    }
 
     //todo: You need to decide what to do when X is less than 0 or greater than width
     //todo: You need to decide what to do when Y is less than 0 or greater than height
@@ -113,8 +132,8 @@ abstract class Mover implements Movable {
 
   /*
     Save this for your subclasses to override.
-    but notice how it is tagged with abstract, meaning 
-    it is incomplete. (It's like an I.O.U.)
+   but notice how it is tagged with abstract, meaning 
+   it is incomplete. (It's like an I.O.U.)
    */
   abstract void show();
 
@@ -122,44 +141,45 @@ abstract class Mover implements Movable {
   /*
     TODO: Part 4: Implement collision detection
    */
-  boolean collidingWith(Movable object){
-     return false; 
+  boolean collidingWith(Movable m) {
+    float distance = dist(x, y, m.getX(), m.getY());
+    boolean touching = distance < (radius + m.getRadius());
+    return touching;
   }
-  
-  float getX(){
+
+  float getX() {
     return this.x;
   }
-  
-  float getY(){
+
+  float getY() {
     return this.y;
   }
-  
-  float getDirection(){
+
+  float getDirection() {
     return this.direction;
   }
-  
-  float getSpeed(){
+
+  float getSpeed() {
     return this.speed;
   }
-  
-  float getRadius(){
+
+  float getRadius() {
     return this.radius;
   }
-  
-  void setDirection(float newDirectionInDegrees){
+
+  void setDirection(float newDirectionInDegrees) {
     this.direction = newDirectionInDegrees;
   }
-  
-  void setSpeed(float newSpeed){
+
+  void setSpeed(float newSpeed) {
     this.speed = newSpeed;
   }
-  
-  void setX(float newX){
+
+  void setX(float newX) {
     this.x = newX;
   }
-  
-  void setY(float newY){
+
+  void setY(float newY) {
     this.y = newY;
   }
-  
 }

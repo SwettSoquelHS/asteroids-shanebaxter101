@@ -1,3 +1,5 @@
+
+
 /*
   Spaceship class
  Should extend Mover class and implement show.
@@ -10,8 +12,8 @@ class Spaceship extends Mover {
     super(x, y);
   }
 
-  Spaceship(float x, float y, float speed, float direction) {
-    super(x, y, speed, direction);
+  Spaceship(float x, float y, float speed, float direction, float size) {
+    super(x, y, speed, direction, size);
   }
 
   void show() {
@@ -62,5 +64,12 @@ class Spaceship extends Mover {
     vertex(5, 0);
     endShape();
     popMatrix();
+  }
+  
+  void hyperspace(){
+    this.speed = 0;
+    this.x = random(100, 900);
+    this.y = random(100, 700);
+  
   }
 }

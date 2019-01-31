@@ -60,6 +60,7 @@ public void draw() {
 
   //Draw asteroids
   for(int i=0; i<asteroids.length; i++){
+    //asteroids[i].checkCollision(asteroids[i], player1);
     asteroids[i].update();
     asteroids[i].show();
   }
@@ -70,7 +71,7 @@ public void draw() {
   if (ROTATE_RIGHT)
     player1.setDirection(player1.getDirection() + 3.0);
   if (MOVE_FORWARD) {
-    if (player1.getSpeed() < 3) {
+    if (player1.getSpeed() < 2) {
       player1.setSpeed(player1.getSpeed() + 5);
     }
   } else {
@@ -82,7 +83,7 @@ public void draw() {
     }
   }
   
-  
+  player1.checkCollisions(asteroids, player1);
   player1.show();
   player1.update();
 

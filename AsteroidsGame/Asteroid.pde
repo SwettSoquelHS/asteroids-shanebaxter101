@@ -14,6 +14,7 @@ class Asteroid extends Mover {
   
   Asteroid(float x, float y, float speed, float direction, float size){
     super(x, y, speed, direction, size);
+    radius = 15 * size;
     
   }
   
@@ -51,4 +52,9 @@ class Asteroid extends Mover {
     else 
       direction -= 0.5;
   }
+  
+ /* void checkCollision(Asteroid a, Spaceship p){
+    if(a.collidingWith(p))
+      direction = direction + 180;
+  } */
 }

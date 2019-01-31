@@ -72,4 +72,12 @@ class Spaceship extends Mover {
     this.y = random(100, 700);
   
   }
+  
+  void checkCollisions(Asteroid[] a, Spaceship p){
+    for(int i=0; i<a.length; i++){
+      if(p.collidingWith(a[i]))
+        if(speed > 0.5)
+          speed = 0.5;
+    }
+  }
 }

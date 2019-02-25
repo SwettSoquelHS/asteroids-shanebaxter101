@@ -7,13 +7,17 @@
  might be useful.
  */
 class Spaceship extends Mover {  
+  
+  Bullet myBullet;
 
   Spaceship(float x, float y) {
     super(x, y);
+    radius = 10;
   }
 
   Spaceship(float x, float y, float speed, float direction, float size) {
     super(x, y, speed, direction, size);
+    radius = 10;
   }
 
   void show() {
@@ -64,20 +68,32 @@ class Spaceship extends Mover {
     vertex(5, 0);
     endShape();
     popMatrix();
+    
+    myBullet.show();
   }
-  
-  void hyperspace(){
+
+  void hyperspace() {
     this.speed = 0;
     this.x = random(100, 900);
     this.y = random(100, 700);
-  
   }
-  
-  void checkCollisions(Asteroid[] a, Spaceship p){
-    for(int i=0; i<a.length; i++){
-      if(p.collidingWith(a[i]))
-        if(speed > 0.5)
+
+  void checkCollisions(Asteroid[] a, Spaceship p) {
+    for (int i=0; i<a.length; i++) {
+      if (p.collidingWith(a[i]))
+        if (speed > 0.5)
           speed = 0.5;
     }
+  }
+
+  void fire() {
+    if (myBullet != null && !myBullet.isAlive()) {
+      myBullet = new Bullet(x, y);
+    }
+  }
+  
+  void update(){
+    super.update();
+    myBullet.update();
   }
 }

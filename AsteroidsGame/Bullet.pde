@@ -12,13 +12,12 @@ class Bullet extends Mover {
   }
 
   void show() {
-    if(live > 0){
+      fill(255, 213, 41);
       pushMatrix();
       translate(x,y);
       rotate(radians(direction));
-      ellipse(x, y, 4, 4);
+      ellipse(0, 0, size, size);
       popMatrix();
-    }
   }
 
   void update() {

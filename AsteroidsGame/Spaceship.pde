@@ -9,15 +9,18 @@
 class Spaceship extends Mover {  
   
   Bullet myBullet;
+  ArrayList bullets;
 
   Spaceship(float x, float y) {
     super(x, y);
     radius = 10;
+    bullets = new ArrayList<Bullet>();
   }
 
   Spaceship(float x, float y, float speed, float direction, float size) {
     super(x, y, speed, direction, size);
     radius = 10;
+    bullets = new ArrayList<Bullet>();
   }
 
   void show() {
@@ -25,7 +28,8 @@ class Spaceship extends Mover {
     translate(x, y);
     rotate(radians(direction + 270));
     fill(216, 9, 9);
-    beginShape();
+    triangle(-10, -10, -10, 10, 20, 0);
+    /*beginShape();
     vertex(5, 0);
     vertex(15, -35);
     vertex(15, -37);
@@ -66,10 +70,11 @@ class Spaceship extends Mover {
     vertex(-10, -35);
     vertex(0, 0);
     vertex(5, 0);
-    endShape();
+    endShape();*/
     popMatrix();
     
-    myBullet.show();
+    if(myBullet != null)
+      myBullet.show();
   }
 
   void hyperspace() {
@@ -87,13 +92,16 @@ class Spaceship extends Mover {
   }
 
   void fire() {
-    if (myBullet != null && !myBullet.isAlive()) {
-      myBullet = new Bullet(x, y);
-    }
+      myBullet = new Bullet(this.x, this.y, this.speed + 2, this.direction, 7);
+      bullets.add(myBullet);
   }
   
   void update(){
     super.update();
-    myBullet.update();
+    for(int i=0; i<bullets.size(); i++){
+      Object b = bullets.get(i);
+      if(b != null)
+        b.update();
+    }
   }
 }

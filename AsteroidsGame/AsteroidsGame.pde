@@ -83,6 +83,10 @@ public void draw() {
     }
   }
   
+  if(SPACE_BAR){
+    player1.fire();
+  }
+  
   player1.checkCollisions(asteroids, player1);
   player1.show();
   player1.update();

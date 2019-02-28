@@ -9,15 +9,18 @@ class Bullet extends Mover {
 
   Bullet(float x, float y, float speed, float direction, float size) {
     super(x, y, speed, direction, size);
+    live = 100;
   }
 
   void show() {
-      fill(255, 213, 41);
+    if(live > 0){
       pushMatrix();
       translate(x,y);
       rotate(radians(direction));
+      fill(217, 255, 5);
       ellipse(0, 0, size, size);
       popMatrix();
+    }
   }
 
   void update() {
@@ -28,4 +31,10 @@ class Bullet extends Mover {
   boolean isAlive(){
     return false;
   }
+  
+  int getLive(){
+    return live;
+  }
+  
+  void setLive(int n) { live = n; }
 }

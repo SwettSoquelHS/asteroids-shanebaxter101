@@ -9,7 +9,7 @@
 class Spaceship extends Mover {  
   
   Bullet myBullet;
-  ArrayList bullets;
+  ArrayList<Bullet> bullets;
 
   Spaceship(float x, float y) {
     super(x, y);
@@ -26,7 +26,7 @@ class Spaceship extends Mover {
   void show() {
     pushMatrix();
     translate(x, y);
-    rotate(radians(direction + 270));
+    rotate(radians(direction));
     fill(216, 9, 9);
     triangle(-10, -10, -10, 10, 20, 0);
     /*beginShape();
@@ -73,8 +73,11 @@ class Spaceship extends Mover {
     endShape();*/
     popMatrix();
     
-    if(myBullet != null)
-      myBullet.show();
+    for(int i=0; i<bullets.size(); i++){
+      Bullet b = bullets.get(i);
+      if(b != null)
+        b.show();
+    }
   }
 
   void hyperspace() {
@@ -85,23 +88,39 @@ class Spaceship extends Mover {
 
   void checkCollisions(Asteroid[] a, Spaceship p) {
     for (int i=0; i<a.length; i++) {
-      if (p.collidingWith(a[i]))
+      if (p.collidingWith(a[i]) && a[i].getAlive())
         if (speed > 0.5)
           speed = 0.5;
     }
   }
 
   void fire() {
+    if(bullets.size() < 11){
       myBullet = new Bullet(this.x, this.y, this.speed + 2, this.direction, 7);
       bullets.add(myBullet);
+    }
   }
   
   void update(){
     super.update();
     for(int i=0; i<bullets.size(); i++){
-      Object b = bullets.get(i);
+      Bullet b = bullets.get(i);
       if(b != null)
         b.update();
+      if(b.getLive() < 0){
+        bullets.remove(b);
+      }
     }
+  }
+  
+  boolean hasHitTarget(Asteroid target){
+    for(int i=0; i<bullets.size(); i++){
+      Bullet b = bullets.get(i);
+      if(b.collidingWith(target)){
+        target.setAlive(false);
+        b.setLive(0);
+      }
+    }
+    return false;
   }
 }

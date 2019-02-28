@@ -67,12 +67,12 @@ public void draw() {
 
   //Update spaceship
   if (ROTATE_LEFT)
-    player1.setDirection(player1.getDirection() - 3.0);
+    player1.setDirection(player1.getDirection() - 5.0);
   if (ROTATE_RIGHT)
-    player1.setDirection(player1.getDirection() + 3.0);
+    player1.setDirection(player1.getDirection() + 5.0);
   if (MOVE_FORWARD) {
     if (player1.getSpeed() < 2) {
-      player1.setSpeed(player1.getSpeed() + 5);
+      player1.setSpeed(player1.getSpeed() + 4);
     }
   } else {
     if (player1.getSpeed() > 0) {
@@ -91,6 +91,9 @@ public void draw() {
   player1.show();
   player1.update();
 
+  for(int i=0; i<asteroids.length; i++){
+    player1.hasHitTarget(asteroids[i]);
+  }
 
   //Check for ship collision agaist asteroids
   //TODO: Part II or III
@@ -116,7 +119,7 @@ void keyPressed() {
       ROTATE_RIGHT = true;
     } else if (keyCode == UP) {
       MOVE_FORWARD = true;
-    }
+    }  
   }
 
   //32 is spacebar

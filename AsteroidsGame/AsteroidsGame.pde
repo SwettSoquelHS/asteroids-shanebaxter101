@@ -29,11 +29,11 @@ public void setup() {
   asteroids = new Asteroid[10];
   for(int i=0; i< asteroids.length; i++) {
     if(i % 3 == 0)
-      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 2.0);
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 2, random(0, 360), 2.0);
     if(i % 2 == 0)
-      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 1.5);
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 2, random(0, 360), 1.5);
     else
-      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 0.3, random(0, 360), 1.0);
+      asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 2, random(0, 360), 1.0);
   } 
 }
 
@@ -49,16 +49,23 @@ public void draw() {
   for(int i=0; i<starField.length; i++){
     starField[i].show();
   }
+  
+  for(int i=0; i<asteroids.length; i++){
+    for(int j=0; j<asteroids.length; j++){
+      if(asteroids[i].collidingWith(asteroids[j]) && i != j && asteroids[i].getAlive() && asteroids[j].getAlive()){
+        asteroids[i].setDirection(asteroids[i].getDirection() + 90);
+        asteroids[i].setX(asteroids[i].getX() + 5);
+        asteroids[i].setY(asteroids[i].getY() + 5);
+        
+        asteroids[j].setDirection(asteroids[j].getDirection() + 90);
+        asteroids[j].setX(asteroids[j].getX() + 5);
+        asteroids[j].setY(asteroids[j].getY() + 5);
+      }
+      
+    }
+  }
 
-  //Check bullet collisions
-  //TODO: Part III or IV - for not just leave this comment
-
-  //TODO: Part II, Update each of the Asteroids internals
-
-  //Check for asteroid collisions against other asteroids and alter course
-  //TODO: Part III, for now keep this comment in place
-
-  //Draw asteroids
+  
   for(int i=0; i<asteroids.length; i++){
     //asteroids[i].checkCollision(asteroids[i], player1);
     asteroids[i].update();

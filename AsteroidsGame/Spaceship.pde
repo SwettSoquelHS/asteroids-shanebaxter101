@@ -10,17 +10,20 @@ class Spaceship extends Mover {
   
   Bullet myBullet;
   ArrayList<Bullet> bullets;
+  int lives;
 
   Spaceship(float x, float y) {
     super(x, y);
     radius = 10;
     bullets = new ArrayList<Bullet>();
+    lives = 3;
   }
 
   Spaceship(float x, float y, float speed, float direction, float size) {
     super(x, y, speed, direction, size);
     radius = 10;
     bullets = new ArrayList<Bullet>();
+    lives = 3;
   }
 
   void show() {
@@ -88,9 +91,12 @@ class Spaceship extends Mover {
 
   void checkCollisions(Asteroid[] a, Spaceship p) {
     for (int i=0; i<a.length; i++) {
-      if (p.collidingWith(a[i]) && a[i].getAlive())
-        if (speed > 0.5)
-          speed = 0.5;
+      if (p.collidingWith(a[i]) && a[i].getAlive()){
+        speed = 0;
+        x = 300;
+        y = 200;
+        lives--;
+      }
     }
   }
 

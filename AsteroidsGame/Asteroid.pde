@@ -63,8 +63,4 @@ class Asteroid extends Mover {
   
   boolean getAlive(){ return alive; }
   
- /* void checkCollision(Asteroid a, Spaceship p){
-    if(a.collidingWith(p))
-      direction = direction + 180;
-  } */
 }

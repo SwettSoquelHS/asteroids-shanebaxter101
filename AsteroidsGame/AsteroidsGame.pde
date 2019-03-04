@@ -26,7 +26,7 @@ public void setup() {
     starField[i] = new Star(random(0,1000), random(0, 800), (int)random(6,9));
   } 
   
-  asteroids = new Asteroid[10];
+  asteroids = new Asteroid[20];
   for(int i=0; i< asteroids.length; i++) {
     if(i % 3 == 0)
       asteroids[i] = new Asteroid(random(0, 1000), random(0,800), 2, random(0, 360), 2.0);
@@ -58,8 +58,8 @@ public void draw() {
         asteroids[i].setY(asteroids[i].getY() + 5);
         
         asteroids[j].setDirection(asteroids[j].getDirection() + 90);
-        asteroids[j].setX(asteroids[j].getX() + 5);
-        asteroids[j].setY(asteroids[j].getY() + 5);
+        asteroids[j].setX(asteroids[j].getX() - 5);
+        asteroids[j].setY(asteroids[j].getY() - 5);
       }
       
     }
@@ -79,7 +79,7 @@ public void draw() {
     player1.setDirection(player1.getDirection() + 5.0);
   if (MOVE_FORWARD) {
     if (player1.getSpeed() < 2) {
-      player1.setSpeed(player1.getSpeed() + 4);
+      player1.setSpeed(player1.getSpeed() + 3);
     }
   } else {
     if (player1.getSpeed() > 0) {
@@ -158,16 +158,3 @@ void keyReleased() {
     SPACE_BAR = false;
   }
 }
-
-/* void checkOnAsteroids(){
-  for(int i=0; i < asteroids.length; i++){
-    Asteroid a = asteroids[i];
-    for(int j=0; j < asteroids.length; j++){
-      Asteroid a2 = asteroids[j];
-      if(a != a2 && a.collidingWith(a2)){
-        // do something...
-      }
-    }
-  }
-}
-*/

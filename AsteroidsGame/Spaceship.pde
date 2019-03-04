@@ -27,6 +27,14 @@ class Spaceship extends Mover {
   }
 
   void show() {
+    if(lives < 1){
+      fill(31, 219, 32);
+      pushMatrix();
+      textSize(30);
+      text("GAME \nOVER", 500, 400);
+      popMatrix();
+    } else {
+    
     pushMatrix();
     translate(x, y);
     rotate(radians(direction));
@@ -80,6 +88,10 @@ class Spaceship extends Mover {
       Bullet b = bullets.get(i);
       if(b != null)
         b.show();
+      }
+      fill(31, 219, 32);
+      text("Lives: " + lives, 20, 20);
+      
     }
   }
 
@@ -91,7 +103,7 @@ class Spaceship extends Mover {
 
   void checkCollisions(Asteroid[] a, Spaceship p) {
     for (int i=0; i<a.length; i++) {
-      if (p.collidingWith(a[i]) && a[i].getAlive()){
+      if (p.collidingWith(a[i]) && a[i].getAlive() && x != 300 && y != 200){
         speed = 0;
         x = 300;
         y = 200;
@@ -101,7 +113,7 @@ class Spaceship extends Mover {
   }
 
   void fire() {
-    if(bullets.size() < 11){
+    if(bullets.size() < 11 && x != 300 && y != 200){
       myBullet = new Bullet(this.x, this.y, this.speed + 2, this.direction, 7);
       bullets.add(myBullet);
     }

@@ -4,7 +4,7 @@ class Bullet extends Mover {
 
   Bullet(float x, float y) {
     super(x, y);
-    live = 100;
+    live = 80;
   }
 
   Bullet(float x, float y, float speed, float direction, float size) {
